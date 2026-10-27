@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Privacy-first résumé and public GitHub evidence analyzer by Joseph Hernandez.">
+  <title>Candidate Analyzer Demo</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+</head><body>
+  <header><a href="/">← Joseph Hernandez</a><span>CLIENT-SIDE ANALYSIS</span><a href="https://github.com/josephmhernandez/candidate-analyzer-demo">Source ↗</a></header>
+  <main>
+    <section class="hero"><p class="eyebrow">CANDIDATE ANALYZER · PUBLIC DEMO</p><h1>Turn a résumé into an evidence map.</h1><p>Compare résumé text with a role and optionally inspect public GitHub repositories. Résumé and job text stay in your browser; this site has no upload endpoint or candidate database.</p><div class="privacy">● Local-only résumé processing <span>● Transparent scoring</span> <span>● No hiring decision</span></div></section>
+    <section class="workspace">
+      <form id="analyzer-form" class="panel inputs">
+        <div class="panel-head"><div><small>01 / INPUT</small><h2>Analysis material</h2></div><button id="sample" type="button" class="ghost">Load sample</button></div>
+        <label>Résumé text<textarea id="resume" rows="11" placeholder="Paste résumé text, or choose a PDF/text file below…"></textarea></label>
+        <div class="upload"><label for="file">Choose PDF or TXT</label><input id="file" type="file" accept=".pdf,.txt,text/plain,application/pdf"><span id="file-status">Processed only in this browser</span></div>
+        <label>Target job description<textarea id="job" rows="8" placeholder="Paste the role requirements…"></textarea></label>
+        <label>Public GitHub username <span class="optional">optional</span><input id="github" autocomplete="off" placeholder="e.g. josephmhernandez"></label>
+        <button class="primary" type="submit">Analyze evidence <span>→</span></button>
+        <p id="form-error" class="error" role="alert"></p>
+      </form>
+      <section class="panel results" id="results" aria-live="polite">
+        <div class="empty"><div class="radar"></div><h2>Your report will appear here</h2><p>Use the sample for an immediate tour, or provide your own text. The rubric is descriptive—not a recommendation to hire or reject anyone.</p></div>
+      </section>
+    </section>
+  </main>
+</body></html>
