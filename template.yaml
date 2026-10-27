@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless AI analysis API for the SWE Lens public demo
+Resources:
+  AnalyzerApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins: [https://josephmhernandez.com]
+        AllowMethods: [POST, OPTIONS]
+        AllowHeaders: [content-type]
+        MaxAge: 600
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 4
+        ThrottlingRateLimit: 1
+  AnalyzerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/
+      Handler: index.handler
+      Runtime: nodejs22.x
+      Architectures: [arm64]
+      MemorySize: 512
+      Timeout: 60
+      ReservedConcurrentExecutions: 2
+      Environment:
+        Variables:
+          SECRET_ID: prod/repo-analyzer
+          GEMINI_MODEL: gemini-flash-latest
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: secretsmanager:GetSecretValue
+              Resource: !Sub arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:prod/repo-analyzer-*
+      Events:
+        Analyze:
+          Type: HttpApi
+          Properties: { ApiId: !Ref AnalyzerApi, Path: /analyze, Method: POST }
+Outputs:
+  ApiUrl:
+    Value: !Sub https://${AnalyzerApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}

@@ -1,39 +1,37 @@
-# Candidate Analyzer Demo
+# SWE Lens Candidate Analyzer Demo
 
-A privacy-first public demonstration of résumé-to-role comparison and visible GitHub evidence analysis.
+A working public demo of the backend analysis concept from the original Candidate Analyzer project.
 
 **Live demo:** <https://josephmhernandez.com/demos/candidate/>
 
-![Candidate evidence report demo](docs/demo.png)
+## Working flow
 
-## Why this version exists
+1. The browser extracts text from a selected PDF locally.
+2. The résumé text, target role, and optional public GitHub username are sent to a throttled AWS HTTP API.
+3. Lambda retrieves public repository metadata and README evidence using a server-side GitHub credential.
+4. Gemini Flash—the model family used by the later original worker—returns a structured, evidence-oriented report.
+5. Nothing is written to the retired Supabase candidate tables; the request is processed in memory.
 
-The original Candidate Analyzer included authentication, subscriptions, payments, Supabase, job queues, and multiple analyzer services. This portfolio version removes payments and account management to make the core interaction safe and immediately testable.
+The demo intentionally excludes accounts, subscriptions, token purchases, Stripe, and automated hire/reject decisions.
 
-## Features
+## Relationship to the original code
 
-- Paste résumé and job-description text
-- Read PDF or text files locally in the browser
-- Compare explicitly disclosed technical terms
-- Inspect public GitHub repository metadata
-- Produce transparent category scores and concrete improvement suggestions
-- Bundled synthetic example for a reliable walkthrough
+The original system had a FastAPI submission service, SQS queues, Supabase task tracking, and separate repository/candidate workers. An early module imported LangChain classes, but its active model calls used the Google Generative AI client directly; the later worker also called Gemini directly. This demo preserves the staged repository-evidence and candidate-analysis prompts while using a smaller serverless runtime suitable for a public portfolio.
 
-## Privacy
-
-Résumé and job-description content never leave the browser. There is no upload endpoint, database, analytics tracker, authentication system, or payment flow. Optional GitHub analysis calls GitHub's public API directly from the visitor's browser.
-
-## Limitations
-
-This is an explanatory heuristic, not a validated employment assessment. It does not recommend hiring or rejection and should not be used as the sole basis for an employment decision.
-
-## Run locally
+## Deploy
 
 ```bash
-python3 -m http.server 8080 --directory web
+sam build
+sam deploy --stack-name jmh-candidate-analyzer-demo --resolve-s3 --capabilities CAPABILITY_IAM
 ```
 
-Then open <http://localhost:8080>.
+## Safety and cost controls
+
+- API throttling and Lambda reserved concurrency
+- Input length limits and public GitHub evidence only
+- No database or object storage for résumé/job text
+- A low-cost Gemini Flash model with bounded output tokens
+- The report explicitly supports human review and does not make employment decisions
 
 ## License
 

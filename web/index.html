@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="en"><head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Privacy-first résumé and public GitHub evidence analyzer by Joseph Hernandez.">
+  <meta name="description" content="AI-backed résumé, role, and public GitHub evidence analyzer by Joseph Hernandez.">
   <link rel="canonical" href="https://josephmhernandez.com/demos/candidate/">
   <meta property="og:title" content="Candidate Analyzer Demo">
-  <meta property="og:description" content="Compare résumé evidence with a role entirely inside the browser.">
-  <title>Candidate Analyzer Demo</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+  <meta property="og:description" content="Run a real backend analysis of résumé, job, and public GitHub project evidence.">
+  <title>Candidate Analyzer Demo</title><link rel="stylesheet" href="style.css"><script src="config.js"></script><script src="app.js" defer></script>
 </head><body>
-  <header><a href="/">← Joseph Hernandez</a><span>CLIENT-SIDE ANALYSIS</span><a href="https://github.com/josephmhernandez/candidate-analyzer-demo">Source ↗</a></header>
+  <header><a href="/">← Joseph Hernandez</a><span>LIVE AI ANALYSIS</span><a href="https://github.com/josephmhernandez/candidate-analyzer-demo">Source ↗</a></header>
   <main>
-    <section class="hero"><p class="eyebrow">CANDIDATE ANALYZER · PUBLIC DEMO</p><h1>Turn a résumé into an evidence map.</h1><p>Compare résumé text with a role and optionally inspect public GitHub repositories. Résumé and job text stay in your browser; this site has no upload endpoint or candidate database.</p><div class="privacy">● Local-only résumé processing <span>● Transparent scoring</span> <span>● No hiring decision</span></div></section>
+    <section class="hero"><p class="eyebrow">SWE LENS · PUBLIC DEMO</p><h1>Turn a résumé into an evidence map.</h1><p>The real backend compares résumé and role requirements with evidence from public GitHub projects, then returns a structured AI report. Input is processed in memory and is not stored.</p><div class="privacy">● Backend AI workflow <span>● Public GitHub evidence</span> <span>● No hiring decision</span></div></section>
     <section class="workspace">
       <form id="analyzer-form" class="panel inputs">
         <div class="panel-head"><div><small>01 / INPUT</small><h2>Analysis material</h2></div><button id="sample" type="button" class="ghost">Load sample</button></div>
         <label>Résumé text<textarea id="resume" rows="11" placeholder="Paste résumé text, or choose a PDF/text file below…"></textarea></label>
-        <div class="upload"><label for="file">Choose PDF or TXT</label><input id="file" type="file" accept=".pdf,.txt,text/plain,application/pdf"><span id="file-status">Processed only in this browser</span></div>
+        <div class="upload"><label for="file">Choose PDF or TXT</label><input id="file" type="file" accept=".pdf,.txt,text/plain,application/pdf"><span id="file-status">PDF text is extracted in your browser</span></div>
         <label>Target job description<textarea id="job" rows="8" placeholder="Paste the role requirements…"></textarea></label>
         <label>Public GitHub username <span class="optional">optional</span><input id="github" autocomplete="off" placeholder="e.g. josephmhernandez"></label>
         <button class="primary" type="submit">Analyze evidence <span>→</span></button>

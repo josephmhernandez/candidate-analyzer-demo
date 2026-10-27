@@ -1,0 +1,1 @@
+{"name":"swe-lens-demo-backend","version":"1.0.0","private":true,"type":"commonjs","dependencies":{"@aws-sdk/client-secrets-manager":"^3.922.0"}}
