@@ -4,6 +4,8 @@ A privacy-first public demonstration of résumé-to-role comparison and visible 
 
 **Live demo:** <https://josephmhernandez.com/demos/candidate/>
 
+![Candidate evidence report demo](docs/demo.png)
+
 ## Why this version exists
 
 The original Candidate Analyzer included authentication, subscriptions, payments, Supabase, job queues, and multiple analyzer services. This portfolio version removes payments and account management to make the core interaction safe and immediately testable.
